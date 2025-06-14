@@ -1,4 +1,4 @@
-
+let totalBill = 0;
 
 function calculateGrocery(){
     let grocery1Bill = parseFloat(document.getElementById('grocery1').value);
@@ -8,10 +8,7 @@ function calculateGrocery(){
     function calculation(grocery1Bill, grocery2Bill, grocery3Bill){
         return grocery1Bill + grocery2Bill + grocery3Bill; 
     }
-    return calculation(grocery1Bill, grocery2Bill, grocery3Bill);
+    totalBill = calculation(grocery1Bill, grocery2Bill, grocery3Bill);
+    document.getElementById('result').innerText = `The Total amount is: ${totalBill}`;
+    console.log("The Total amount is: ", totalBill);
 }
-
-let totalBill = calculateGrocery();
-
-document.getElementById('result').innerText = `The Total amount is: ${totalBill}`;
-console.log("The Total amount is: ", totalBill);
