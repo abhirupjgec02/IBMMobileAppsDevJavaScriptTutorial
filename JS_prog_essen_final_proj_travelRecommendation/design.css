@@ -54,7 +54,7 @@ nav {
   input[type="text"],
   input[type="number"],
   select {
-    width: 200px;
+    width: 170px;
     padding: 5px;
   }
   
@@ -99,8 +99,14 @@ nav {
     text-align: justify;
   }
 
-  #about h2 {
+  #about,
+  #contact,
+  #recomCities,
+  #recomArch,
+  #recomBeaches,
+  #contact h2 {
     margin-top: 0;
     color: #ffff03;
   }
+
   
