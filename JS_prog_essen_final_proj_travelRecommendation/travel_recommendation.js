@@ -69,7 +69,18 @@ function showBeaches(){
       });
 }
 
+function clearDivisions(){
+    document.getElementById("recomCities").innerHTML = "";
+    document.getElementById("recomResultCities").innerHTML = "";
+    document.getElementById("recomArch").innerHTML = "";
+    document.getElementById("recomResultArch").innerHTML = "";
+    document.getElementById("recomBeaches").innerHTML = "";
+    document.getElementById("recomResultBeaches").innerHTML = "";
+}
+
 function showRecommendations(){
+    document.getElementById("searchInput").value = "";
+    clearDivisions();
     showCities();
     showArches();
     showBeaches();
@@ -79,32 +90,20 @@ showRecommendations();
 
 function filterBySearchKeyWords(){
     const input = document.getElementById("searchInput").value.toLowerCase();
-    if(input.includes('cit')) {
-        document.getElementById("recomCities").innerHTML = "";
-        document.getElementById("recomResultCities").innerHTML = "";
+    if(input.includes('coun') || input.includes('cit')) {
+        clearDivisions();
         showCities();
-        document.getElementById("recomArch").innerHTML = "";
-        document.getElementById("recomResultArch").innerHTML = "";
-        document.getElementById("recomBeaches").innerHTML = "";
-        document.getElementById("recomResultBeaches").innerHTML = "";
     } else if(input.includes('arch')) {
-        document.getElementById("recomArch").innerHTML = "";
-        document.getElementById("recomResultArch").innerHTML = "";
+        clearDivisions();
         showArches();
-        document.getElementById("recomCities").innerHTML = "";
-        document.getElementById("recomResultCities").innerHTML = "";
-        document.getElementById("recomBeaches").innerHTML = "";
-        document.getElementById("recomResultBeaches").innerHTML = "";
     } else if(input.includes('beach')) {
-        document.getElementById("recomBeaches").innerHTML = "";
-        document.getElementById("recomResultBeaches").innerHTML = "";
+        clearDivisions();
         showBeaches();
-        document.getElementById("recomCities").innerHTML = "";
-        document.getElementById("recomResultCities").innerHTML = "";
-        document.getElementById("recomArch").innerHTML = "";
-        document.getElementById("recomResultArch").innerHTML = "";
     }
 }
 
 btnSearch.addEventListener('click', filterBySearchKeyWords);
+
+
+btnClear.addEventListener('click', showRecommendations);
 
