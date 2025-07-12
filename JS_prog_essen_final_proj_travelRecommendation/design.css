@@ -23,8 +23,8 @@ nav {
   }
   
   nav a {
-    text-decoration: none;
-    color: #2e2e44;
+    text-decoration: underline;
+    color: #ffff03;
     font-weight: bold;
   }
   
