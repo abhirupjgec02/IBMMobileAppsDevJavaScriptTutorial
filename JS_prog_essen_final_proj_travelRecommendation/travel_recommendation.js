@@ -1,25 +1,41 @@
 let newDiv = "";
+let options = {
+    timeZone: '', 
+    hour12: true, 
+    hour: 'numeric', 
+    minute: 'numeric', 
+    second: 'numeric'
+};
 
 function searchResultProcessing(img, item){
     img.classList.toggle("zoom-in");
     newDiv = document.createElement("div");
     newDiv.className = "customContainer";
-    
+
     const textarea = document.createElement("textarea");
     textarea.id = item.name + "_textarea";
     textarea.rows = 4;
     textarea.cols = 50;
     textarea.placeholder = item.name + " : " + item.description;
 
+    options.timeZone = item.timeZone;
+    const localTime = new Date().toLocaleTimeString('en-US', options);
+    const timeLabel = document.createElement("h2");
+    timeLabel.innerHTML = localTime;
+    console.log(`Local time at ${item.name} is : ${localTime}`);
+
     const table = document.createElement("table");
     const row = document.createElement("tr");
     const cell1 = document.createElement("td");
     const cell2 = document.createElement("td");
+    const cell3 = document.createElement("td");
 
     cell1.appendChild(img);
     cell2.appendChild(textarea);
+    cell3.appendChild(timeLabel);
     row.appendChild(cell1);
     row.appendChild(cell2);
+    row.appendChild(cell3);
     table.appendChild(row);
     table.cellSpacing = "30";
 
