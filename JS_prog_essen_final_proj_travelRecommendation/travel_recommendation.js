@@ -161,7 +161,7 @@ function filterBySearchKeyWords(){
     if(input.includes('coun') || input.includes('cit')) {
         clearDivisions();
         showCities(true);
-    } else if(input.includes('arch')) {
+    } else if(input.includes('arch') || input.includes('tem')) {
         clearDivisions();
         showArches(true);
     } else if(input.includes('bea')) {
