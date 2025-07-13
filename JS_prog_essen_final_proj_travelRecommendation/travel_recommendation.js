@@ -1,7 +1,37 @@
-function showCities(){
+let newDiv = "";
+
+function searchResultProcessing(img, item){
+    img.classList.toggle("zoom-in");
+    newDiv = document.createElement("div");
+    newDiv.className = "customContainer";
+    
+    const textarea = document.createElement("textarea");
+    textarea.id = item.name + "_textarea";
+    textarea.rows = 4;
+    textarea.cols = 50;
+    textarea.placeholder = item.name + " : " + item.description;
+
+    const table = document.createElement("table");
+    const row = document.createElement("tr");
+    const cell1 = document.createElement("td");
+    const cell2 = document.createElement("td");
+
+    cell1.appendChild(img);
+    cell2.appendChild(textarea);
+    row.appendChild(cell1);
+    row.appendChild(cell2);
+    table.appendChild(row);
+    table.cellSpacing = "30";
+
+    newDiv.appendChild(table);
+    document.body.appendChild(newDiv);
+}
+
+function showCities(zoomPic){
     const heading = document.createElement("h2");
     heading.textContent = "Cities";
     document.getElementById("recomCities").appendChild(heading);
+    let imgCount = 3;
 
     fetch('travel_recommendation_api.json')
     .then(response => response.json())
@@ -14,8 +44,17 @@ function showCities(){
                 img.height = 100;
                 img.alt = city.name;
                 img.title = city.name;
-                document.getElementById("recomResultCities").appendChild(img);
+                if(zoomPic){
+                    searchResultProcessing(img, city);
+                    imgCount--;
+                    if(imgCount === 0)
+                        break;
+                } else {
+                    document.getElementById("recomResultCities").appendChild(img);
+                }
             }
+            if(imgCount === 0)
+                break;
         }
       }).catch(error => {
         console.error('Error:', error);
@@ -23,7 +62,7 @@ function showCities(){
       });
 }
 
-function showArches(){
+function showArches(zoomPic){
     const heading = document.createElement("h2");
     heading.textContent = "Architectures";
     document.getElementById("recomArch").appendChild(heading);
@@ -38,7 +77,11 @@ function showArches(){
             temImg.height = 100;
             temImg.alt = temple.name;
             temImg.title = temple.name;
-            document.getElementById("recomResultArch").appendChild(temImg);
+            if(zoomPic){
+                searchResultProcessing(temImg, temple);
+            } else {
+                document.getElementById("recomResultArch").appendChild(temImg);
+            }
         }
       }).catch(error => {
         console.error('Error:', error);
@@ -46,7 +89,7 @@ function showArches(){
       });
 }
 
-function showBeaches(){
+function showBeaches(zoomPic){
     const heading = document.createElement("h2");
     heading.textContent = "Leisures And Beaches";
     document.getElementById("recomBeaches").appendChild(heading);
@@ -61,7 +104,11 @@ function showBeaches(){
             bImg.height = 100;
             bImg.alt = beach.name;
             bImg.title = beach.name;
-            document.getElementById("recomResultBeaches").appendChild(bImg);
+            if(zoomPic){
+                searchResultProcessing(bImg, beach);
+            } else {
+                document.getElementById("recomResultBeaches").appendChild(bImg);
+            }
         }
       }).catch(error => {
         console.error('Error:', error);
@@ -76,14 +123,19 @@ function clearDivisions(){
     document.getElementById("recomResultArch").innerHTML = "";
     document.getElementById("recomBeaches").innerHTML = "";
     document.getElementById("recomResultBeaches").innerHTML = "";
+    
+    let elements = document.querySelectorAll(".customContainer");
+    if(elements){
+        elements.forEach(element => element.remove());
+    }
 }
 
 function showRecommendations(){
     document.getElementById("searchInput").value = "";
     clearDivisions();
-    showCities();
-    showArches();
-    showBeaches();
+    showCities(false);
+    showArches(false);
+    showBeaches(false);
 }
 
 showRecommendations();
@@ -92,13 +144,13 @@ function filterBySearchKeyWords(){
     const input = document.getElementById("searchInput").value.toLowerCase();
     if(input.includes('coun') || input.includes('cit')) {
         clearDivisions();
-        showCities();
+        showCities(true);
     } else if(input.includes('arch')) {
         clearDivisions();
-        showArches();
-    } else if(input.includes('beach')) {
+        showArches(true);
+    } else if(input.includes('bea')) {
         clearDivisions();
-        showBeaches();
+        showBeaches(true);
     }
 }
 
