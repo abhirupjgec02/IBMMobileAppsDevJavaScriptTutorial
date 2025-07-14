@@ -1,0 +1,16 @@
+A. Creating and starting a React Application : 
+    1. Creating react applications is simple. Almost like spring boot in java.
+        Command --> npm create vite@latest <app name> -- --template react 
+
+    2. Install the all necessary files which are required to run the react application by running this command.:
+        Command --> npm install 
+
+    3.Then in the terminal write given commands to update scripts in package.json file and hit enter:
+        Command --> npm pkg set scripts.lint="eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0" 
+        Command --> npm pkg set scripts.preview="vite build && vite preview --host"
+
+    4. To check the React app that has been created, run the following command:
+        npm run preview  
+
+
+
