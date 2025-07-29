@@ -1,0 +1,19 @@
+installing expo package in the editor : npx create-expo-app@latest
+installing react native app with blank template : npx create-expo-app <app name> --template blank
+
+
+starting the application : npm start
+dependencies to check the output of the project created : npx expo install react-dom react-native-web @expo/metro-runtime
+checking the error, if any : npx expo install react-native-web react-dom @expo/metro-runtime -- -- legacy peer deps
+
+To View Application in web browser, we need to install : npx expo install react-dom react-native-web @expo/metro-runtime
+
+For installing react navigation :	npx expo install @react-navigation/native (For expo)  OR    npm install @react-navigation/native (for react native CLI)
+									npx expo install @react-navigation/native-stack (For expo)  OR    npm install @react-navigation/native-stack (for react native CLI)
+									npx expo install @react-navigation/bottom-tab (For expo)  OR    npm install @react-navigation/bottom-tab (for react native CLI)
+									npx expo install @react-navigation/drawer (For expo)  OR    npm install @react-navigation/drawer (for react native CLI)
+Beside navigation, we also need :	npm install react-native-screens react-native-safe-area-context
+									&&
+									npm install react-native-gesture-handler   OR   npx expo install react-native-gesture-handler
+
+
