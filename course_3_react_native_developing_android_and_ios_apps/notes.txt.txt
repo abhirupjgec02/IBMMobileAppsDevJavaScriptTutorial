@@ -17,3 +17,15 @@ Beside navigation, we also need :	npm install react-native-screens react-native-
 									npm install react-native-gesture-handler   OR   npx expo install react-native-gesture-handler
 
 
+
+
+Redux toolkit usage process steps : 1. Creating the slice --> Define the states and logic to modify the reducers for a specific feature.
+									2. Configuring the store --> Serves as the central repository for the application state. Also holds the state tree, and handles 
+																	dispatching actions to the appropriate reducers.
+									3. Connecting the store to the react applciation --> Also allows components to interact with the global state. 
+																							The Provider component from react-redux, makes the store available to the rest of the app.
+									4. Interact with the store --> Using useSelector and useDispatch functions to mofidy the state as needed.
+																	
+																	
+																	
+																	
