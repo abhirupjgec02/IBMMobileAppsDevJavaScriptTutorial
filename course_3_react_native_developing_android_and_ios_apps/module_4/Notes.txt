@@ -1,0 +1,1 @@
+1. Installing async storage --> npm install @react-native-async-storage/async-storages
