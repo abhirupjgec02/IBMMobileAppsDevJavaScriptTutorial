@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "FindApartments",
-    "slug": "FindApartments",
+    "name": "travelguide",
+    "slug": "travelguide",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,14 +19,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.abhirupjgec02.FindApartments"
+      "package": "com.abhirupjgec02.travelguide"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "66992793-c586-481e-bf21-dee5353efae6"
+        "projectId": "055c5d63-b153-4c7b-8c8d-1c715e38e3b1"
       }
     }
   }

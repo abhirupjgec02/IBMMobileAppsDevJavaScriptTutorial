@@ -13,8 +13,8 @@ const App = () => {
       if(response.status == 404) {
         throw Error("Data not found");
       } else {
-      const json = await response.json(); // Parsing the JSON response
-      setData(json); // Set data in state
+        const json = await response.json(); // Parsing the JSON response
+        setData(json); // Set data in state
       }
     } catch (error) {
       console.error('Error fetching data:', error);

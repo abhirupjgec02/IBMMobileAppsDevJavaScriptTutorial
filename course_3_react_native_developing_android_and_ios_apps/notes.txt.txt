@@ -30,7 +30,15 @@ Redux toolkit usage process steps : 1. Creating the slice --> Define the states 
 									
 installing formik and yup : 	npm install formik
 								npm install yup2
-																	
+											
+installing EAS CLI : 			npm install -g eas-cli
+logging into EAS   :			eas login
+configure EAS for your project : 	eas build:configure 
+create first build :			eas build -p android --profile preview
+
+
+
+						
 																	
 																	
 																	
