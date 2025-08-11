@@ -1,6 +1,6 @@
 installing expo package in the editor : npx create-expo-app@latest
 installing react native app with blank template : npx create-expo-app <app name> --template blank
-
+installling u-pdated npm version : npm install -g npm@<version>
 
 starting the application : npm start
 dependencies to check the output of the project created : npx expo install react-dom react-native-web @expo/metro-runtime
