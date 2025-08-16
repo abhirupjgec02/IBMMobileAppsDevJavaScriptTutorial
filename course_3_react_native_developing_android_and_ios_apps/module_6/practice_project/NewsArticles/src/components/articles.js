@@ -23,8 +23,7 @@ export default function Articles({ categories, articles }) {
 const ArticleCard = ({ item, index, navigation }) => {
   return (
     <View
-      style={[styles.cardContainer, { paddingLeft: 20, paddingRight: 15}]} testID="articleDisplay"
-    >
+      style={[styles.cardContainer, { paddingLeft: 20, paddingRight: 15}]} testID="articleDisplay">
       <TouchableOpacity onPress={() => navigation.navigate('ArticleDetail', {...item})}>
         <Image source={{uri: item.thumbnail}} style={[styles.articleImage, {height: index % 3 === 0 ? hp(25):hp(35)}]}/>
         <Text style={styles.articleText}>

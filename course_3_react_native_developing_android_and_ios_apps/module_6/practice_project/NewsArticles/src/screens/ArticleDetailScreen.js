@@ -33,10 +33,28 @@ export default function ArticleDetailScreen(props) {
     >
       {/* Article Image */}
       <View style={styles.imageContainer} testID="imageContainer">
-         
+         <Image source={{uri: article.thumbnail}} style={styles.articleImage}/>
       </View>
-
       {/* Back Button and Favorite Button */}
+       <View style={styles.topButtonsContainer}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backButton}
+        >
+          <Text>Back</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleToggleFavorite}
+          style={[
+            styles.favoriteButton,
+            {
+              backgroundColor: "white",
+            },
+          ]}
+        >
+          <Text>{isFavourite ? "♥" : "♡"}</Text>
+        </TouchableOpacity>
+      </View>
                  
 
       {/* Article Description */}
@@ -48,22 +66,20 @@ export default function ArticleDetailScreen(props) {
             testID="articleDetailsContainer"
           >
             <Text style={styles.articleTitle} testID="articleTitle">
-         
-             
-              
-              </Text>
+              {article.title}
+            </Text>
             <Text style={styles.articleCategory} testID="articleCategory">
-                         
-              </Text>
+              {article.category}
+            </Text>
           </View>
 
           {/* Description */}
           <View
-            
             style={styles.sectionContainer}
             testID="sectionContainer"
           >
-          
+            <Text style={styles.sectionTitle}>Description</Text>
+            <Text style={styles.descriptionText}>{article.description}</Text>
           </View>
         </View>
     </ScrollView>
