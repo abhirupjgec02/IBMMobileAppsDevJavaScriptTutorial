@@ -19,27 +19,48 @@ export default function MyArticlesScreen() {
   const navigation = useNavigation();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     const fetchArticles = async () => {
-     
+      const storedArticles = await AsyncStorage.getItem("customArticles");
+      if (storedArticles) {
+        setArticles(JSON.parse(storedArticles));
+      }
+      setLoading(false); // Loading is complete
     };
 
     fetchArticles();
   }, []);
 
+  const addArticle = async (article) => {
+    setArticles((prev) => {
+      const updated = [...prev, article];
+      AsyncStorage.setItem("customArticles", JSON.stringify(updated));
+      return updated; // ✅ updates UI immediately
+    });
+  };
+
   const handleAddArticle = () => {
-    navigation.navigate("NewsFormScreen");
+    navigation.navigate("NewsFormScreen", {onArticleAdd : addArticle});
   };
 
   const handleArticleClick = (article) => {
+    navigation.navigate("CustomNewsScreen", { article });
   };
 
-  const deleteArticle = async () => {
-    
+  const deleteArticle = async (index) => {
+    try {
+      const updatedArticles = [...articles];
+      updatedArticles.splice(index, 1); // Remove article from array
+      await AsyncStorage.setItem("customArticles", JSON.stringify(updatedArticles)); // Update AsyncStorage
+      setArticles(updatedArticles); // Update state
+    } catch (error) {
+      console.error("Error deleting the article:", error);
+    }
   };
 
-  const editArticle = () => {
+  const editArticle = (article, index) => {
+    navigation.navigate("NewsFormScreen", { articleToEdit: article, articleIndex: index });
   };
 
   return (
@@ -62,18 +83,33 @@ export default function MyArticlesScreen() {
           ) : (
             articles.map((article, index) => (
               <View key={index} style={styles.articleCard} testID="articleCard">
-                <TouchableOpacity testID="handleArticleBtn">
-                  
+                <TouchableOpacity testID="handleArticleBtn" onPress={() => handleArticleClick(article)}>
+                   {article.image && (
+                    <Image
+                      source={{ uri: article.image }}
+                      style={styles.articleImage}
+                    />
+                  )}
                   <Text style={styles.articleTitle}>{article.title}</Text>
                   <Text style={styles.articleDescription} testID="articleDescp">
-                  
+                    {article.description?.substring(0, 50) + "..."}
                   </Text>
                 </TouchableOpacity>
 
                 {/* Edit and Delete Buttons */}
                 <View style={styles.actionButtonsContainer} testID="editDeleteButtons">
-                  
-                 
+                   <TouchableOpacity
+                    onPress={() => editArticle(article, index)}
+                    style={styles.editButton}
+                  >
+                    <Text style={styles.editButtonText}>Edit</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => deleteArticle(index)}
+                    style={styles.deleteButton}
+                  >
+                    <Text style={styles.deleteButtonText}>Delete</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             ))

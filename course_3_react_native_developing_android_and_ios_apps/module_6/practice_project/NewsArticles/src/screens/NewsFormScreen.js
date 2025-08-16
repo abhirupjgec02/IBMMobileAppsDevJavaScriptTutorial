@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {widthPercentageToDP as wp,heightPercentageToDP as hp,} from "react-native-responsive-screen";
 
 export default function NewsFormScreen({ route, navigation }) {
-  const { articleToEdit, articleIndex, onArticleEdited } = route.params || {};
+  const { articleToEdit, articleIndex, onArticleEdited, onArticleAdd } = route.params || {};
   const [title, setTitle] = useState(articleToEdit ? articleToEdit.title : "");
   const [image, setImage] = useState(articleToEdit ? articleToEdit.image : "");
   const [description, setDescription] = useState(
@@ -12,7 +12,23 @@ export default function NewsFormScreen({ route, navigation }) {
   );
 
   const saveArticle = async () => {
-    
+    const newArticle = { title, image, description };
+    try {
+      const existingArticles = await AsyncStorage.getItem("customArticles");
+      const articles = existingArticles ? JSON.parse(existingArticles) : [];
+
+      // If editing an article, update it; otherwise, add a new one
+      if (articleToEdit !== undefined) {
+        articles[articleIndex] = newArticle;
+        await AsyncStorage.setItem("customArticles", JSON.stringify(articles));
+        if (onArticleEdited) onArticleEdited(); // Notify the edit
+      } else {
+        if (onArticleAdd) onArticleAdd(newArticle);
+      }
+      navigation.goBack(); // Return to the previous screen
+    } catch (error) {
+      console.error("Error saving the article:", error);
+    }
   };
 
   return (
